@@ -127,8 +127,10 @@ gulp.task('watch', function() {
 });
 
 gulp.task('deploy', ['build'], function(done) {
+  bundler.close();
   ghpages.publish(path.join(__dirname, 'dist'), {
-    logger: gutil.log
+    logger: gutil.log,
+    branch: 'master'
   }, done);
 });
 
