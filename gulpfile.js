@@ -77,8 +77,13 @@ gulp.task('images', ['clean:images'], function() {
     .pipe(connect.reload());
 });
 
-gulp.task('cname', function () {
+gulp.task('cname', function() {
   return gulp.src('CNAME')
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('favicons', function() {
+  return gulp.src('src/favicons/*')
     .pipe(gulp.dest('dist'));
 });
 
@@ -134,7 +139,7 @@ gulp.task('deploy', ['build'], function(done) {
   }, done);
 });
 
-gulp.task('build', ['js', 'html', 'css', 'images', 'cname']);
+gulp.task('build', ['js', 'html', 'css', 'images', 'favicons', 'cname']);
 gulp.task('serve', ['connect', 'watch']);
 gulp.task('default', ['build'], function() {
   bundler.close();
