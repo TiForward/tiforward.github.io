@@ -1,48 +1,33 @@
-doctype html
-html
-  head
-    title Ti.Forward
-    meta(charset="utf-8")
-    link(rel="stylesheet",href="build/main.css")
-    link(rel="stylesheet",href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
-    meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
-    include favicons
-  body
-    .masthead.first
-      img(width="200",src="images/logo.png")
-      h1 Ti.Forward
-      p.lead.
-        <strong>By</strong> the Titanium™ community <br>
-        <strong>For</strong> the Titanium™ community
-      include calls_to_action
+extends templates/layout
 
-    .masthead
-      h2 Manifesto
-      p.lead.
-        Titanium™ has been brought to us by the hard working team  at
-        Appcelerator®.
+block navigation
+  +navigation('Manifesto')
 
-      h3 We want
-      p.lead.
-        To assist with the burden of the ongoing development and support in
-        order to help push the platform forward. Appcelerator® has given us a
-        lot, its time to help give back!
+block body
+  .section.first
+    img(width="200",src="images/logo.png")
+    h1 Ti.Forward
+    p.lead.
+      <strong>By</strong> the Titanium™ community <br>
+      <strong>For</strong> the Titanium™ community
 
-      h3 We need
-      p.lead.
-        To help grow and educate the Ti community on how the core of Titanium™
-        works in order to strengthen the community!
+  .section
+    h2 Manifesto
+    p.lead.
+      Titanium™ has been brought to us by the hard working team  at
+      Appcelerator®.
 
-      h3 We will
-      p.lead.
-        Help take Titanium™ and it's community to the next level.
+    h3 We want
+    p.lead.
+      To assist with the burden of the ongoing development and support in
+      order to help push the platform forward. Appcelerator® has given us a
+      lot, its time to help give back!
 
-    .masthead
-      include calls_to_action
+    h3 We need
+    p.lead.
+      To help grow and educate the Ti community on how the core of Titanium™
+      works in order to strengthen the community!
 
-    .masthead.last
-      p Be humble »
-      p.small Titanium™, Appcelerator®, and Hyperloop™ are registered trademarks of Appcelerator inc.
-      p.small Ti.Forward and the community members assisting in this effort are in no way affiliated with Appcelerator inc.
-
-    script(src="build/bundle.js")
+    h3 We will
+    p.lead.
+      Help take Titanium™ and it's community to the next level.

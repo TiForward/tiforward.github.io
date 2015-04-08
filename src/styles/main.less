@@ -5,14 +5,32 @@
 @js-sand: #AA8803;
 @js-yellow: #FFDD55;
 
+// Bootstrap variables
+
 @body-bg: @js-yellow;
 @text-color: #222;
+@code-color: @js-sand;
+
+@pre-border-color: @pre-bg;
 
 @brand-primary: darken(@js-sand, 20%);
 
 @headings-font-family: 'Maven Pro', Helvetica Neue, Helvetica, Arial, sans-serif;
 
-.masthead {
+@navbar-default-bg: @js-yellow;
+@navbar-default-border: @js-yellow;
+@navbar-default-link-color: @brand-primary;
+@navbar-default-link-active-color: @js-yellow;
+@navbar-default-link-active-bg: @brand-primary;
+
+
+@navbar-default-toggle-border-color: @js-yellow;
+@navbar-default-toggle-hover-bg: @js-sand;
+@navbar-default-toggle-icon-bar-bg: @brand-primary;
+
+// Styles
+
+.section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,18 +41,8 @@
   padding: 2em;
   position: relative;
 
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -2px;
-    right: 30%;
-    left: 30%;
-    border-bottom: 4px solid lighten(@js-sand, 6%);
-  }
-
   &.first {
-    min-height: 70vh;
+    min-height: 40vh;
   }
 
   &.last::after {
@@ -61,6 +69,118 @@
   strong {
     font-weight: inherit;
     color: darken(@js-sand, 5%);
+  }
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: 30%;
+  left: 30%;
+}
+
+.section::after,
+.separator,
+.content hr {
+    display: block;
+    height: auto;
+    max-width: 40vw;
+    margin: 0 auto;
+    border: 0 none;
+    border-top: 4px solid lighten(@js-sand, 6%);
+}
+
+.navbar-main {
+  padding: 3%;
+}
+
+.content-wrapper {
+  padding: 0 2em;
+  margin: 2em auto 0;
+  max-width: 700px;
+  font-weight: 200;
+
+  .section {
+    padding: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  a:link,
+  a:visited {
+    color: @js-sand;
+  }
+
+  a.section {
+    color: @js-sand;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  hr, .separator {
+    margin: 2em auto;
+  }
+}
+
+.author {
+  margin: 5em 0 2em;
+
+  h3 {
+    text-align: center;
+    color: @js-sand;
+  }
+
+  h4 {
+    margin: 0 0 0.6em;
+  }
+
+  .media-object {
+    filter: grayscale(1);
+    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.2);
+    mix-blend-mode: luminosity;
+  }
+
+  .media-body > :last-child {
+    margin-bottom: 0px;
+  }
+
+  .media {
+    max-width: 500px;
+    margin: 0 auto;
+    color: @js-sand;
+    border: 2px solid lighten(@js-sand, 6%);
+    padding: 1em;
+    border-radius: 4px;
+  }
+}
+
+.content {
+  font-size: 20px;
+
+  @media (max-width: @screen-xs-max) {
+    font-size: 18px;
+  }
+
+  p {
+    margin: 0 0 1em;
+  }
+
+  table {
+    width: 100%;
+    margin: 1em 0;
+    border-collapse: collapse;
+
+    th, td {
+      padding: 0.2em 1em;
+    }
+
+    td {
+      border-top: 1px solid lighten(@js-sand, 6%);
+      border-bottom: 1px solid lighten(@js-sand, 6%);
+    }
   }
 }
 

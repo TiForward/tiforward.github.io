@@ -1,0 +1,19 @@
+extends templates/layout
+
+block title
+  title Journal &mdash; Ti.Forward
+
+block navigation
+  +navigation('Journal')
+
+block body
+  .section.first
+    h1 Journal
+    p.lead All the things Ti.Forward
+  .content-wrapper
+    for article in utils.getArticles()
+      a.section(href="/journal/#{article.slug}/"): article
+        h2 #{article.title}
+        p.lead #{article.lead}
+        p Posted #{article.date} by #{article.author.name}
+      .separator

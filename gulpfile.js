@@ -4,11 +4,16 @@ var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var connect = require('gulp-connect');
 var csso = require('gulp-csso');
+var frontmatter = require('front-matter');
+var fs = require('fs');
 var ghpages = require('gh-pages');
+var gjade = require('gulp-jade');
+var glob = require('glob');
 var gutil = require('gulp-util');
 var ignore = require('gulp-ignore');
-var jade = require('gulp-jade');
+var jade = require('jade');
 var less = require('gulp-less');
+var markdown = require('gulp-markdown-to-json');
 var opn = require('opn');
 var path = require('path');
 var plumber = require('gulp-plumber');
@@ -33,22 +38,107 @@ bundler.transform('babelify', {
 
 bundler.transform('debowerify');
 
-gulp.task('js', ['clean:js'], function() {
+// Utilities
+
+var jadeUtils = {
+  getSections: getSections,
+  getArticles: getArticles
+};
+
+function getArticles() {
+  return glob.sync('journal/**/*.md')
+  .map(function (filepath) {
+    var data = frontmatter(fs.readFileSync(filepath, 'utf-8')).attributes;
+    data.slug = getSlug(data.slug || path.relative(path.resolve('journal'), filepath));
+    data.author = data.author && require('./journal/authors/' + data.author);
+    return data;
+  });
+}
+
+function getSections(name) {
+  name = String(name || '');
+  return [
+    {
+      slug: '/',
+      name: 'Manifesto'
+    },
+    {
+      slug: '/journal/',
+      name: 'Journal'
+    }
+  ].map(function (section) {
+    section.active = (section.name.toLowerCase() === name.toLowerCase()) ? 'active' : '';
+    return section;
+  });
+}
+
+var slugRE = /^(\d\d\d\d)[-\/\\](\d\d?)[-\/\\](\d\d?)[-\/\\]([^\.]*)/i;
+
+function getSlug(slug) {
+  var match = String(slug).match(slugRE);
+
+  if (match) {
+    return match.slice(1, 5).join('/');
+  }
+
+  return slug;
+}
+
+// Tasks
+
+function runJS() {
   return bundler.bundle()
     .pipe(isDist ? through() : plumber())
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('dist/build'))
     .pipe(connect.reload());
+}
+
+gulp.task('js', runJS);
+
+gulp.task('journal', function() {
+  return gulp.src('journal/**/*.md')
+    .pipe(markdown({ }))
+    .pipe(through(function (file) {
+      var data = JSON.parse(file.contents.toString('utf-8'));
+
+      data.slug = getSlug(data.slug || path.relative(file.base, file.path));
+      data.author = data.author && require('./journal/authors/' + data.author);
+
+      var content = jade.renderFile('src/templates/journal_article.jade', {
+        article: data,
+        utils: jadeUtils
+      });
+
+      file.path = path.resolve(file.base, data.slug + '/index.html');
+      file.contents = new Buffer(content);
+
+      this.queue(file);
+    }))
+    .pipe(gulp.dest('dist/journal'))
+    .pipe(connect.reload());
 });
 
-gulp.task('html', ['clean:html'], function() {
+gulp.task('html', ['clean:html', 'journal'], function() {
   return gulp.src('src/*.jade')
     .pipe(ignore.exclude('_*'))
     .pipe(isDist ? through() : plumber())
-    .pipe(jade({
-      pretty: true
+    .pipe(gjade({
+      jade: jade,
+      pretty: true,
+      locals: {
+        utils: jadeUtils
+      }
     }))
-    .pipe(rename({ extname: '.html' }))
+    .pipe(through(function(file) {
+      if (file.path === path.resolve('src/index.html')) {
+        file.path = path.resolve('src');
+      }
+
+      this.queue(file);
+    }))
+    // Hack!
+    .pipe(rename({ extname: '/index.html' }))
     .pipe(gulp.dest('dist'))
     .pipe(connect.reload());
 });
@@ -123,12 +213,14 @@ gulp.task('connect', ['build'], function(done) {
 });
 
 gulp.task('watch', function() {
+  gulp.watch('journal/**/*.md', ['html']);
   gulp.watch('src/**/*.jade', ['html']);
   gulp.watch('src/styles/**/*.less', ['css']);
   gulp.watch('src/images/**/*', ['images']);
-  gulp.watch([
-    'src/scripts/**/*.js'
-  ], ['js']);
+
+  bundler.on('update', function() {
+    runJS()
+  });
 });
 
 gulp.task('deploy', ['build'], function(done) {

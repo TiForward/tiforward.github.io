@@ -1,0 +1,28 @@
+extends layout
+
+block title
+  title #{article.title} &mdash; Ti.Forward
+  
+block navigation
+  +navigation('Journal')
+
+block body
+  .content-wrapper
+    .section
+      h2 #{article.title}
+      p.lead #{article.lead}
+      p Posted #{article.date} by #[a(href=article.author.url)= article.author.name ]
+
+    .content
+      .separator
+      != article.body
+
+    .author
+      h3 About the author
+      .media
+        .media-left
+          a(href=article.author.url)
+            img.media-object(width="50",height="50",src="//www.gravatar.com/avatar/#{article.author.gravatar}.png?s=100")
+        .media-body
+          h4: a(href=article.author.url)= article.author.name
+          p= article.author.bio
