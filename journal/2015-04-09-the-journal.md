@@ -17,8 +17,9 @@ all to have a look at them and contribute your whishes and ideas.
 
 [discuss]: https://github.com/TiForward/discuss/issues
 
-If a more direct and fast discussion is your piece of cake there’s also [a
-pretty active Gitter chat][gitter] where we can share opinions all together.
+If a more direct and fast discussion is more your style there’s also [a
+pretty active Gitter chat][gitter] where we can discuss opinions as a
+community.
 
 [gitter]: https://gitter.im/TiForward/tiforward.github.io
 
