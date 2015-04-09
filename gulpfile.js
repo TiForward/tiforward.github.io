@@ -52,6 +52,9 @@ function getArticles() {
     data.slug = getSlug(data.slug || path.relative(path.resolve('journal'), filepath));
     data.author = data.author && require('./journal/authors/' + data.author);
     return data;
+  })
+  .sort(function (a, b) {
+    return -(a.slug.localeCompare(b.slug));
   });
 }
 
@@ -72,7 +75,7 @@ function getSections(name) {
   });
 }
 
-var slugRE = /^(\d\d\d\d)[-\/\\](\d\d?)[-\/\\](\d\d?)[-\/\\]([^\.]*)/i;
+var slugRE = /^(\d\d\d\d)[-\/\\](\d\d)[-\/\\](\d\d)[-\/\\]([^\.]*)/i;
 
 function getSlug(slug) {
   var match = String(slug).match(slugRE);
