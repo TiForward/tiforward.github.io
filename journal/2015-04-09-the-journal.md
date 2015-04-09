@@ -2,7 +2,7 @@
 title: The Journal is here
 lead: Step by step, as we go down the rabbit hole
 author: yuchi
-date: Apr 8, 2015
+date: Apr 9, 2015
 ---
 
 As you probably already know, **Ti.Forward** is a community-born effort to
