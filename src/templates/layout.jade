@@ -3,13 +3,14 @@ doctype html
 include mixins
 
 html
-  head
+  head(prefix="og: http://ogp.me/ns#")
     block title
       title Ti.Forward
     meta(charset="utf-8")
     link(rel="stylesheet",href="/build/main.css?cache-buster=1")
     link(rel="stylesheet",href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
     meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+    block meta
     include favicons
   body
 

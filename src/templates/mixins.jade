@@ -3,3 +3,11 @@ mixin navigation(name)
   ul.nav.navbar-nav.navbar-right
     for section in sections
       li(class=section.active): a(href=section.slug)= section.name
+
+mixin open-graph
+  for content, property in attributes
+    meta(property="og:#{property}", content=content)
+
+mixin twitter
+  for content, property in attributes
+    meta(property="twitter:#{property}", content=content)

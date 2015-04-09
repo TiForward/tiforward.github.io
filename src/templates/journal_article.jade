@@ -2,7 +2,24 @@ extends layout
 
 block title
   title #{article.title} &mdash; Ti.Forward
-  
+
+block append meta
+  +open-graph(
+    type = "article"
+    title = article.title
+    description = article.lead
+    url = "http://tiforward.org/journal/#{article.slug}/"
+    image = "http://tiforward.org/images/logo.png"
+    site_name = "Ti.Forward"
+  )
+  +twitter(
+    card = "summary"
+    title = article.title
+    description = article.lead
+    url = "http://tiforward.org/journal/#{article.slug}/"
+    site = "@TiFwd"
+  )
+
 block navigation
   +navigation('Journal')
 
@@ -24,5 +41,12 @@ block body
           a(href=article.author.url)
             img.media-object(width="50",height="50",src="//www.gravatar.com/avatar/#{article.author.gravatar}.png?s=100")
         .media-body
+          .btn-group.btn-group-xs.pull-right
+            a.btn.btn-primary(href="https://twitter.com/#{article.author.twitter}")
+              i.fa.fa-twitter &nbsp;
+              span= article.author.twitter
+            a.btn.btn-primary(href="https://github.com/#{article.author.github}")
+              i.fa.fa-github-alt &nbsp;
+              span= article.author.github
           h4: a(href=article.author.url)= article.author.name
           p= article.author.bio

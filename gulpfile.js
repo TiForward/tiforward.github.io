@@ -50,12 +50,16 @@ function getArticles() {
   .map(function (filepath) {
     var data = frontmatter(fs.readFileSync(filepath, 'utf-8')).attributes;
     data.slug = getSlug(data.slug || path.relative(path.resolve('journal'), filepath));
-    data.author = data.author && require('./journal/authors/' + data.author);
+    data.author = data.author && getJSON(path.resolve('journal/authors/', data.author + '.json'));
     return data;
   })
   .sort(function (a, b) {
     return -(a.slug.localeCompare(b.slug));
   });
+}
+
+function getJSON(filename) {
+  return JSON.parse(fs.readFileSync(filename, 'utf-8'));
 }
 
 function getSections(name) {
@@ -216,6 +220,7 @@ gulp.task('connect', ['build'], function(done) {
 });
 
 gulp.task('watch', function() {
+  gulp.watch('journal/**/*.json', ['html']);
   gulp.watch('journal/**/*.md', ['html']);
   gulp.watch('src/**/*.jade', ['html']);
   gulp.watch('src/styles/**/*.less', ['css']);
