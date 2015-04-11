@@ -26,27 +26,29 @@ block navigation
 block body
   .content-wrapper
     .section
-      h2 #{article.title}
-      p.lead #{article.lead}
+      h2(lang=article.locale) #{article.title}
+      p.lead(lang=article.locale) #{article.lead}
       p Posted #{article.date} by #[a(href=article.author.url)= article.author.name ]
 
-    .content
+      if translations && translations.length > 0
+        .separator
+          p Available also in
+          for translation in translations
+            - var language = utils.LOCALES[ translation.locale ]
+            p(lang=translation.locale)
+              a(href="/journal/#{translation.slug}/")
+                | #[strong(lang=translation.locale)= language] &mdash; #{translation.title}
+
+    .content(lang=article.locale)
       .separator
       != article.body
 
     .author
       h3 About the author
-      .media
-        .media-left
-          a(href=article.author.url)
-            img.media-object(width="50",height="50",src="//www.gravatar.com/avatar/#{article.author.gravatar}.png?s=100")
-        .media-body
-          .btn-group.btn-group-xs.pull-right
-            a.btn.btn-primary(href="https://twitter.com/#{article.author.twitter}")
-              i.fa.fa-twitter &nbsp;
-              span= article.author.twitter
-            a.btn.btn-primary(href="https://github.com/#{article.author.github}")
-              i.fa.fa-github-alt &nbsp;
-              span= article.author.github
-          h4: a(href=article.author.url)= article.author.name
-          p= article.author.bio
+      +author(article.author)
+
+    if article.translator && article.translator.id !== article.author.id
+      .author
+        h3 About the translator
+        +author(article.translator)
+      

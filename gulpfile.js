@@ -13,7 +13,7 @@ var gutil = require('gulp-util');
 var ignore = require('gulp-ignore');
 var jade = require('jade');
 var less = require('gulp-less');
-var markdown = require('gulp-markdown-to-json');
+var marked = require('marked');
 var opn = require('opn');
 var path = require('path');
 var plumber = require('gulp-plumber');
@@ -42,20 +42,83 @@ bundler.transform('debowerify');
 
 var jadeUtils = {
   getSections: getSections,
-  getArticles: getArticles
+  getArticles: getArticles,
+  getArticle: getArticle,
+  getLocaleArticles: getLocaleArticles,
+  LOCALES: {
+    'it-IT': 'Italiano',
+    'en-US': 'English',
+    'fr-FR': 'Français'
+  }
 };
 
+var ARTICLES_CACHE = null;
+
 function getArticles() {
-  return glob.sync('journal/**/*.md')
+  if (ARTICLES_CACHE) return ARTICLES_CACHE;
+  return ARTICLES_CACHE =
+  glob.sync('journal/**/*.md')
   .map(function (filepath) {
-    var data = frontmatter(fs.readFileSync(filepath, 'utf-8')).attributes;
-    data.slug = getSlug(data.slug || path.relative(path.resolve('journal'), filepath));
-    data.author = data.author && getJSON(path.resolve('journal/authors/', data.author + '.json'));
-    return data;
+    return getArticle(filepath, path.resolve('journal'));
   })
   .sort(function (a, b) {
     return -(a.slug.localeCompare(b.slug));
   });
+}
+
+function getLocaleArticles(locale) {
+  var articles = getArticles();
+  var index = {};
+
+  return articles.reduce(function (memo, article) {
+    var group = index[ article.id ];
+    var append = false;
+
+    if (group == null) {
+      append = true;
+      group = index[ article.id ] = {
+        id: article.id,
+        translations: []
+      };
+    }
+
+    if (article.locale === locale) {
+      group.default = article;
+    }
+    else {
+      group.translations.push(article);
+    }
+
+    return append ? memo.concat([ group ]) : memo;
+  }, []);
+}
+
+function getArticle(filepath, basepath, contents) {
+  contents || (contents = fs.readFileSync(filepath, 'utf-8'));
+  var matter = frontmatter(contents);
+  var data = matter.attributes;
+  var body = matter.body;
+
+  data.id = getSlug(data.slug || path.relative(basepath, filepath));
+  data.author = getPerson(data.author);
+  data.translator = getPerson(data.translator);
+  data.locale = data.locale || 'en-US';
+  data.slug = getSlug(data.id, data.locale);
+  data.body = marked(body);
+
+  return data;
+}
+
+function getPerson(id) {
+  if (!id) {
+    return null;
+  }
+
+  var person = getJSON(path.resolve('journal/authors/', id + '.json'));
+
+  person.id = id;
+
+  return person;
 }
 
 function getJSON(filename) {
@@ -81,11 +144,15 @@ function getSections(name) {
 
 var slugRE = /^(\d\d\d\d)[-\/\\](\d\d)[-\/\\](\d\d)[-\/\\]([^\.]*)/i;
 
-function getSlug(slug) {
+function getSlug(slug, locale) {
   var match = String(slug).match(slugRE);
 
   if (match) {
-    return match.slice(1, 5).join('/');
+    slug = match.slice(1, 5).join('/');
+  }
+
+  if (locale && (locale !== 'en-US')) {
+    slug = [ slug, locale ].join('/');
   }
 
   return slug;
@@ -105,19 +172,24 @@ gulp.task('js', runJS);
 
 gulp.task('journal', function() {
   return gulp.src('journal/**/*.md')
-    .pipe(markdown({ }))
     .pipe(through(function (file) {
-      var data = JSON.parse(file.contents.toString('utf-8'));
+      var article = getArticle(file.path, file.base, file.contents.toString('utf-8'));
 
-      data.slug = getSlug(data.slug || path.relative(file.base, file.path));
-      data.author = data.author && require('./journal/authors/' + data.author);
+      var translations = null;
+
+      getLocaleArticles(article.locale).forEach(function (group) {
+        if (group.id === article.id) {
+          translations = group.translations;
+        }
+      });
 
       var content = jade.renderFile('src/templates/journal_article.jade', {
-        article: data,
+        article: article,
+        translations: translations,
         utils: jadeUtils
       });
 
-      file.path = path.resolve(file.base, data.slug + '/index.html');
+      file.path = path.resolve(file.base, article.slug + '/index.html');
       file.contents = new Buffer(content);
 
       this.queue(file);
@@ -190,6 +262,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('clean:html', function() {
+  ARTICLES_CACHE = null;
   return gulp.src('dist/index.html')
     .pipe(rimraf());
 });

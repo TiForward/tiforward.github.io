@@ -11,3 +11,19 @@ mixin open-graph
 mixin twitter
   for content, property in attributes
     meta(property="twitter:#{property}", content=content)
+
+mixin author(author)
+  .media
+    .media-left
+      a(href=author.url)
+        img.media-object(width="50",height="50",src="//www.gravatar.com/avatar/#{author.gravatar}.png?s=100")
+    .media-body
+      .btn-group.btn-group-xs.pull-right
+        a.btn.btn-primary(href="https://twitter.com/#{author.twitter}")
+          i.fa.fa-twitter &nbsp;
+          span= author.twitter
+        a.btn.btn-primary(href="https://github.com/#{author.github}")
+          i.fa.fa-github-alt &nbsp;
+          span= author.github
+      h4: a(href=author.url)= author.name
+      p= author.bio
