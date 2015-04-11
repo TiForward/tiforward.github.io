@@ -193,6 +193,25 @@
       border-bottom: 1px solid lighten(@js-sand, 6%);
     }
   }
+
+  a[href^='http://'],
+  a[href^='https://'] {
+    &::after {
+      content: "\f14c";
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 14px;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transform: translate(0, 0);
+      vertical-align: top;
+      margin-left: 5px;
+    }
+  }
+
+  a[href^='https://github.com']::after { content: "\f092"; }
+  a[href^='https://gitter.im']::after { content: "\f086"; }
 }
 
 p.small {
