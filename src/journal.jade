@@ -10,16 +10,20 @@ block body
   .section.first
     h1 Journal
     p.lead All the things Ti.Forward
+
   .content-wrapper
     for group in utils.getLocaleArticles('en-US')
       - var article = group.default;
+
       a.section(href="/journal/#{article.slug}/"): article
         h2(lang=article.locale) #{article.title}
-        p.lead(lang=article.locale) #{article.lead}
         p Posted #{article.date} by #{article.author.name}
+        p.lead(lang=article.locale) #{article.lead}
+
       for translation in group.translations
-        a.section(href="/journal/#{translation.slug}/"): article
+        a.section.translation(href="/journal/#{translation.slug}/"): article
           - var language = utils.LOCALES[ translation.locale ]
           h4(lang=translation.locale)= translation.title
           p Translated in #[strong(lang=translation.locale)= language] by #{translation.translator.name}
+
       .separator

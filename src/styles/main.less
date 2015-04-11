@@ -15,11 +15,12 @@
 
 @brand-primary: darken(@js-sand, 20%);
 
+@headings-color: @js-sand;
 @headings-font-family: 'Maven Pro', Helvetica Neue, Helvetica, Arial, sans-serif;
 
 @navbar-default-bg: @js-yellow;
 @navbar-default-border: @js-yellow;
-@navbar-default-link-color: @brand-primary;
+@navbar-default-link-color: @text-color;
 @navbar-default-link-active-color: @js-yellow;
 @navbar-default-link-active-bg: @brand-primary;
 
@@ -35,7 +36,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: @js-sand;
   text-align: center;
   box-sizing: border-box;
   padding: 2em;
@@ -62,7 +62,6 @@
   }
 
   p.lead {
-    color: lighten(@js-sand, 7%);
     max-width: 20em;
   }
 
@@ -115,9 +114,21 @@
   }
 
   a.section {
-    color: @js-sand;
+    color: inherit;
     text-align: center;
     text-decoration: none;
+    border-radius: 4px;
+    border: 2px solid transparent;
+
+    &:hover,
+    &:active,
+    &:focus {
+      border-color: @js-sand;
+    }
+
+    &.translation {
+      margin-top: -2px;
+    }
   }
 
   hr, .separator {
@@ -204,6 +215,12 @@ p.small {
     flex-grow: 1;
     margin: -2px !important;
     border-radius: 0px;
+    position: relative;
+    z-index: 1;
+
+    &.disabled {
+      z-index: 0;
+    }
   }
 }
 
@@ -218,6 +235,10 @@ p.small {
   &:active {
     background: @brand-primary;
     border-color: transparent;
+    color: @js-yellow;
+  }
+
+  &.active {
     color: @js-yellow;
   }
 }

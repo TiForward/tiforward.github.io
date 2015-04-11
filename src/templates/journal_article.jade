@@ -31,13 +31,16 @@ block body
       p Posted #{article.date} by #[a(href=article.author.url)= article.author.name ]
 
       if translations && translations.length > 0
-        .separator
-          p Available also in
-          for translation in translations
+        h6 Available also in
+        .btn-group.btn-group-primary.btn-group-sm
+          for translation in utils.getArticleTranslations(translations, article)
             - var language = utils.LOCALES[ translation.locale ]
-            p(lang=translation.locale)
-              a(href="/journal/#{translation.slug}/")
-                | #[strong(lang=translation.locale)= language] &mdash; #{translation.title}
+            - var className = (article === translation) ? 'active disabled' : '';
+            a.btn.btn-primary(
+              class=className
+              lang=translation.locale
+              href="/journal/#{translation.slug}/")
+              span(lang=translation.locale)= language
 
     .content(lang=article.locale)
       .separator

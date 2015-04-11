@@ -44,6 +44,7 @@ var jadeUtils = {
   getSections: getSections,
   getArticles: getArticles,
   getArticle: getArticle,
+  getArticleTranslations: getArticleTranslations,
   getLocaleArticles: getLocaleArticles,
   LOCALES: {
     'it-IT': 'Italiano',
@@ -91,6 +92,16 @@ function getLocaleArticles(locale) {
 
     return append ? memo.concat([ group ]) : memo;
   }, []);
+}
+
+function getArticleTranslations(translations, article) {
+  if (translations.indexOf(article) < 0) {
+    translations = translations.concat([ article ]);
+  }
+
+  return translations.sort(function (a, b) {
+    return a.locale.localeCompare(b.locale);
+  })
 }
 
 function getArticle(filepath, basepath, contents) {
