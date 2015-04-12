@@ -1,0 +1,94 @@
+<!DOCTYPE html><html><head prefix="og: http://ogp.me/ns#"><title>Sunday recap №1 &mdash; Ti.Forward</title><meta charset="utf-8"><link rel="stylesheet" href="/build/main.css?cache-buster=1"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"><meta property="og:type" content="article"><meta property="og:title" content="Sunday recap №1"><meta property="og:description" content="What happened during the last week"><meta property="og:url" content="http://tiforward.org/journal/2015/04/12/sunday-recap-n-1/"><meta property="og:image" content="http://tiforward.org/images/logo.png"><meta property="og:site_name" content="Ti.Forward"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Sunday recap №1"><meta property="twitter:description" content="What happened during the last week"><meta property="twitter:url" content="http://tiforward.org/journal/2015/04/12/sunday-recap-n-1/"><meta property="twitter:site" content="@TiFwd"><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffdd55">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#ffdd55"></head><body><div class="navbar navbar-main navbar-default navbar-static-top"><div class="container-fluid"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand">Ti.Forward</a></div><div id="navigation" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="/">Manifesto</a></li><li class="active"><a href="/journal/">Journal</a></li></ul></div></div></div><div class="content-wrapper"><div class="section"><h2 lang="en-US">Sunday recap №1</h2><p lang="en-US" class="lead">What happened during the last week</p><p>Posted Apr 12, 2015 by <a href="https://github.com/yuchi">Pier Paolo Ramon</a></p></div><div lang="en-US" class="content"><div class="separator"></div><p>Welcome to the first of a series of Journal posts devoted to summarize the
+<a href="https://github.com/TiForward/discuss/issues">discussions</a> that happened in the last week.</p>
+<h3 id="accessing-the-platform-sdk-native-apis">Accessing the platform SDK native APIs</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/1"><code>#1</code> JS runtime access to 100% of all native APIs, including any 3rd party SDKs added</a></li>
+<li><a href="https://github.com/TiForward/discuss/issues/2"><code>#2</code> The Titanium Mobile API written in JS</a></li>
+</ul>
+<p>Because currently we’re limited to what the Titanium™ SDK offers in terms of
+supported platform APIs, it happens more often than liked that developers hit
+an hard wall when trying to do things not covered.</p>
+<p>Also sometimes the architecture is not performant enough and we are in fact
+limited in what we can do. This is expecially true when talking about intensive
+animations, e.g. parallax scrolling.</p>
+<p>As a provocative idea in <a href="https://github.com/TiForward/discuss/issues/2"><code>#2</code></a> we are discussing the idea of having
+Titanium™ SDK itself written in JS. This would be a major win point in letting
+the community (mostly made by JS developers) understanding and helping in the
+internals of the SDK.</p>
+<p>If we try to recap and bring order to the discussion we can extract the
+following sub-topics:</p>
+<ul>
+<li>How do we lower the barrier for the community to contribute back to the SDK?</li>
+<li>How can we reduce the limits of what it’s possible in user-land?</li>
+<li>Do we want to make platforms APIs fully available in JS-land?</li>
+<li>If yes, wouldn’t building Titanium™ SDK directly in JS, and therefore
+dog-fooding on the architecture, be the best way to make it solid?</li>
+</ul>
+<p>As this is a very felt pain point, it was expected to have a lot of traction.</p>
+<h3 id="layout-engine">Layout engine</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/6"><code>#6</code> Layout engine</a></li>
+</ul>
+<p>Another topic with a lot of traction is the one related to the Layout System.</p>
+<p>This is a very delicate topic, because it happens to touch both the developer
+experience and our ability to use platform UI APIs.</p>
+<p>In fact from one side we want to be able to use the underlying Layout System
+provided by the platform, as it is required for 3rd party widgets for example,
+but from the other side we both want to write cross-platform UIs and with a
+cross-platform ‘language’.</p>
+<p>Some interesting arguments have been made:</p>
+<ul>
+<li>Do we need to support <a href="http://docs.appcelerator.com/titanium/latest/#!/guide/Transitioning_to_the_New_UI_Layout_System">Titanium’s current Layout System</a>?</li>
+<li>Do we need to have access to native Layout System? (Android’s LayoutParams, Cocoa Autolayout)</li>
+<li>Which Layout System will be the one to write cross-platform UIs in Ti.Next?</li>
+</ul>
+<h3 id="asynchronous-apis">Asynchronous APIs</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/3"><code>#3</code> Async approach (developer experience)</a></li>
+<li><a href="https://github.com/TiForward/discuss/issues/4"><code>#4</code> Async approach (low level architecture)</a></li>
+</ul>
+<p>With less traction and discussion I personally hoped for, there are two issues
+related to the async approach we’re gonna take.</p>
+<p>I hoped to have more people to chime in because I personally think that this
+topic which could carve a solution for a lot of other seemingly unrelated ones,
+like UI changes’ performance.</p>
+<h3 id="ecmascript-2015-es6-">EcmaScript 2015 (ES6)</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/8"><code>#8</code> How important is ES6/JavaScript 2015 support?</a></li>
+</ul>
+<p>Not a lot has been expressed, only a lot of questions (and good ones!) but I believe that this topic deserves a lot of attention.</p>
+<p>Please go to <a href="https://github.com/TiForward/discuss/issues/8">the discussion page</a> and express your feelings and ideas
+on the topic.</p>
+<p>To summarize, there we talk about:</p>
+<ul>
+<li>Will ES2015 be a <em>requirement</em> for Ti.Next?</li>
+<li>Will ES2015 be the goto language for examples, docs etc.?</li>
+<li>Are we ok with a transpilation pass?</li>
+</ul>
+<h3 id="other-discussions">Other discussions</h3>
+<ul>
+<li><p><a href="https://github.com/TiForward/discuss/issues/7"><code>#7</code> Platform code separation</a></p>
+<p>What do you prefer? <code>Resources/android/app.js</code> or <code>Resources/app.android.js</code>?
+Chime in to express your preference!</p>
+</li>
+<li><p><a href="https://github.com/TiForward/discuss/issues/5"><code>#5</code> Dependencies (Modules and packages)</a></p>
+<p>We discussed some ideas about packages and modules. A lot still to do there!</p>
+</li>
+</ul>
+</div><div class="author"><h3>About the author</h3><div class="media"><div class="media-left"><a href="https://github.com/yuchi"><img width="50" height="50" src="//www.gravatar.com/avatar/fc40b1fe79ea6b10825141d86f767354.png?s=100" class="media-object"></a></div><div class="media-body"><div class="btn-group btn-group-xs pull-right"><a href="https://twitter.com/_pier" class="btn btn-primary"><i class="fa fa-twitter">&nbsp;</i><span>_pier</span></a><a href="https://github.com/yuchi" class="btn btn-primary"><i class="fa fa-github-alt">&nbsp;</i><span>yuchi</span></a></div><h4><a href="https://github.com/yuchi">Pier Paolo Ramon</a></h4><p>Author of Titaniumifier, Node.js/io.js enthusiast</p></div></div></div></div><div class="section"><div class="btn-group btn-group-primary"><a href="https://github.com/TiForward/discuss" class="btn btn-lg btn-primary"><div>Sign the manifesto</div><div><small>with a star on GitHub</small></div></a><a href="https://github.com/TiForward/discuss/issues" class="btn btn-lg btn-primary"><div>Participate now</div><div><small>to active discussions</small></div></a><a href="https://gitter.im/TiForward/tiforward.github.io" class="btn btn-lg btn-primary"><div>Share your ideas</div><div><small>in the Gitter chat</small></div></a></div><div class="btn-group"><a href="https://twitter.com/TiFwd" class="btn btn-lg"><i class="fa fa-twitter">&nbsp;</i><span>TiFwd</span></a><a href="https://github.com/TiForward" class="btn btn-lg"><i class="fa fa-github-alt">&nbsp;</i><span>TiForward</span></a></div></div><div class="section last"><p>Be humble »</p><p class="small">Titanium™, Appcelerator®, and Hyperloop™ are registered trademarks of Appcelerator inc.</p><p class="small">Ti.Forward and the community members assisting in this effort are in no way affiliated with Appcelerator inc.</p></div><script src="/build/bundle.js"></script></body></html>
