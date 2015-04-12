@@ -28,7 +28,7 @@ Titanium™ SDK itself written in JS. This would be a major win point in letting
 the community (mostly made by JS developers) understanding and helping in the
 internals of the SDK.
 
-If we try to recap and bring order to the discussion we can extract the
+As we try to recap and bring order to the discussion we can extract the
 following sub-topics:
 
 - How do we lower the barrier for the community to contribute back to the SDK?
