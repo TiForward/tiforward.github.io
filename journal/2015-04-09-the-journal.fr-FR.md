@@ -4,6 +4,7 @@ lead: Etape par étape, nous descendons dans le terrier du lapin
 author: yuchi
 translator: goghvan
 date: Apr 9, 2015
+locale: fr-FR
 ---
 
 Comme vous le savez probablement déjà, **Ti.Forward** est un effort
