@@ -111,7 +111,9 @@ function getArticle(filepath, basepath, contents) {
   data.id = getSlug(data.slug || path.relative(basepath, filepath));
   data.author = getPerson(data.author);
   data.translator = getPerson(data.translator);
-  data.locale = data.locale || 'en';
+  data.locale = data.locale || 'en-US';
+  data.languageId = data.locale.split('-')[0];
+  data.language = langmap[ data.languageId ] || langmap[ data.locale ];
   data.slug = getSlug(data.id, data.locale);
   data.body = marked(body);
 

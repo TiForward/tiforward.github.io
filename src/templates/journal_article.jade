@@ -34,13 +34,12 @@ block body
         h6 Available also in
         .btn-group.btn-group-primary.btn-group-sm
           for translation in utils.getArticleTranslations(translations, article)
-            - var language = utils.languages[ translation.locale ].nativeName;
             - var className = (article === translation) ? 'active disabled' : '';
             a.btn.btn-primary(
-              class=className
-              lang=translation.locale
-              href="/journal/#{translation.slug}/")
-              span(lang=translation.locale)= language
+                class=className
+                lang=translation.locale
+                href="/journal/#{translation.slug}/")
+              span(lang=translation.locale)= translation.language.nativeName
 
     .content(lang=article.locale)
       .separator
