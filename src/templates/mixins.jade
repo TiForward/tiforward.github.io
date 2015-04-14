@@ -18,12 +18,15 @@ mixin author(author)
       a(href=author.url)
         img.media-object(width="50",height="50",src="//www.gravatar.com/avatar/#{author.gravatar}.png?s=100")
     .media-body
-      .btn-group.btn-group-xs.pull-right
-        a.btn.btn-primary(href="https://twitter.com/#{author.twitter}")
-          i.fa.fa-twitter &nbsp;
-          span= author.twitter
-        a.btn.btn-primary(href="https://github.com/#{author.github}")
-          i.fa.fa-github-alt &nbsp;
-          span= author.github
+      if author.twitter || author.github
+        .btn-group.btn-group-xs.pull-right
+          if author.twitter
+            a.btn.btn-primary(href="https://twitter.com/#{author.twitter}")
+              i.fa.fa-twitter &nbsp;
+              span= author.twitter
+          if author.github
+            a.btn.btn-primary(href="https://github.com/#{author.github}")
+              i.fa.fa-github-alt &nbsp;
+              span= author.github
       h4: a(href=author.url)= author.name
       p= author.bio
