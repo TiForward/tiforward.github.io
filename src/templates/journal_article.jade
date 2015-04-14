@@ -34,7 +34,7 @@ block body
         h6 Available also in
         .btn-group.btn-group-primary.btn-group-sm
           for translation in utils.getArticleTranslations(translations, article)
-            - var language = utils.LOCALES[ translation.locale ]
+            - var language = utils.languages[ translation.locale ].nativeName;
             - var className = (article === translation) ? 'active disabled' : '';
             a.btn.btn-primary(
               class=className

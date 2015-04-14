@@ -22,7 +22,7 @@ block body
 
       for translation in group.translations
         a.section.translation(href="/journal/#{translation.slug}/"): article
-          - var language = utils.LOCALES[ translation.locale ]
+          - var language = utils.languages[ translation.locale ].nativeName;
           h4(lang=translation.locale)= translation.title
           p Translated in #[strong(lang=translation.locale)= language] by #{translation.translator.name}
 

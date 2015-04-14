@@ -12,6 +12,7 @@ var glob = require('glob');
 var gutil = require('gulp-util');
 var ignore = require('gulp-ignore');
 var jade = require('jade');
+var langmap = require('langmap');
 var less = require('gulp-less');
 var marked = require('marked');
 var opn = require('opn');
@@ -46,11 +47,7 @@ var jadeUtils = {
   getArticle: getArticle,
   getArticleTranslations: getArticleTranslations,
   getLocaleArticles: getLocaleArticles,
-  LOCALES: {
-    'it-IT': 'Italiano',
-    'en-US': 'English',
-    'fr-FR': 'Français'
-  }
+  languages: langmap
 };
 
 var ARTICLES_CACHE = null;
@@ -68,6 +65,7 @@ function getArticles() {
 }
 
 function getLocaleArticles(locale) {
+  var languageId = locale.split('-')[0];
   var articles = getArticles();
   var index = {};
 
@@ -83,7 +81,7 @@ function getLocaleArticles(locale) {
       };
     }
 
-    if (article.locale === locale) {
+    if ((article.locale === locale) || (article.locale === languageId)) {
       group.default = article;
     }
     else {
@@ -113,7 +111,7 @@ function getArticle(filepath, basepath, contents) {
   data.id = getSlug(data.slug || path.relative(basepath, filepath));
   data.author = getPerson(data.author);
   data.translator = getPerson(data.translator);
-  data.locale = data.locale || 'en-US';
+  data.locale = data.locale || 'en';
   data.slug = getSlug(data.id, data.locale);
   data.body = marked(body);
 
@@ -162,7 +160,7 @@ function getSlug(slug, locale) {
     slug = match.slice(1, 5).join('/');
   }
 
-  if (locale && (locale !== 'en-US')) {
+  if (locale && (locale !== 'en-US') && (locale !== 'en')) {
     slug = [ slug, locale ].join('/');
   }
 
