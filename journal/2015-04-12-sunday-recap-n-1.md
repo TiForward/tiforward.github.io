@@ -10,6 +10,8 @@ Welcome to the first of a series of Journal posts devoted to summarize the
 
 [discuss]: https://github.com/TiForward/discuss/issues
 
+- - -
+
 ### Accessing the platform SDK native APIs
 
 - [`#1` JS runtime access to 100% of all native APIs, including any 3rd party SDKs added][issue-1]
@@ -39,6 +41,8 @@ following sub-topics:
 
 As this is a very felt pain point, it was expected to have a lot of traction.
 
+- - -
+
 ### Layout engine
 
 - [`#6` Layout engine][issue-6]
@@ -59,6 +63,8 @@ Some interesting arguments have been made:
 - Do we need to have access to native Layout System? (Android’s LayoutParams, Cocoa Autolayout)
 - Which Layout System will be the one to write cross-platform UIs in Ti.Next?
 
+- - -
+
 ### Asynchronous APIs
 
 - [`#3` Async approach (developer experience)][issue-3]
@@ -70,6 +76,8 @@ related to the async approach we’re gonna take.
 I hoped to have more people to chime in because I personally think that this
 topic which could carve a solution for a lot of other seemingly unrelated ones,
 like UI changes’ performance.
+
+- - -
 
 ### EcmaScript 2015 (ES6)
 
@@ -85,6 +93,8 @@ To summarize, there we talk about:
 - Will ES2015 be a *requirement* for Ti.Next?
 - Will ES2015 be the goto language for examples, docs etc.?
 - Are we ok with a transpilation pass?
+
+- - -
 
 ### Other discussions
 
