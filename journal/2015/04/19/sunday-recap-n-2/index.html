@@ -1,0 +1,93 @@
+<!DOCTYPE html><html><head prefix="og: http://ogp.me/ns#"><title>Sunday recap №2 &mdash; Ti.Forward</title><meta charset="utf-8"><link rel="stylesheet" href="/build/main.css?cache-buster=2"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"><meta property="og:type" content="article"><meta property="og:title" content="Sunday recap №2"><meta property="og:description" content="What happened during the last week"><meta property="og:url" content="http://tiforward.org/journal/2015/04/19/sunday-recap-n-2/"><meta property="og:image" content="http://tiforward.org/images/logo.png"><meta property="og:site_name" content="Ti.Forward"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Sunday recap №2"><meta property="twitter:description" content="What happened during the last week"><meta property="twitter:url" content="http://tiforward.org/journal/2015/04/19/sunday-recap-n-2/"><meta property="twitter:site" content="@TiFwd"><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffdd55">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#ffdd55"></head><body><div class="navbar navbar-main navbar-default navbar-static-top"><div class="container-fluid"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand">Ti.Forward</a></div><div id="navigation" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="/">Manifesto</a></li><li class="active"><a href="/journal/">Journal</a></li></ul></div></div></div><div class="content-wrapper"><div class="section"><h2 lang="en-US">Sunday recap №2</h2><p lang="en-US" class="lead">What happened during the last week</p><p>Posted Apr 19, 2015 by <a href="https://github.com/yuchi">Pier Paolo Ramon</a></p></div><div lang="en-US" class="content"><div class="separator"></div><p>Welcome to the second post of a series devoted to summarize the
+<a href="https://github.com/TiForward/discuss/issues">discussions</a> that happened in the last week.</p>
+<hr>
+<h3 id="tooling">Tooling</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/9"><code>#9</code> Titanium code editor with built-in TiShadow/CLI/Alloy support/Code completion</a></li>
+</ul>
+<p>Great discussion about how and which kind of tooling do we expect from a purely
+OSS environment for Titanium SDK.</p>
+<p>Some interesting debate on how deep the integration between the editor and the
+SDK must be, in other words: an full-blown IDE or a set of plugins?</p>
+<p>The final words are yet to be told, but the path that’s ahead looks split in
+two different directions: a lightweight set of integrations build by the
+community and full-blown IDE, with a tuned developer experience, in the form
+of the Appcelerator® Studio.</p>
+<hr>
+<h3 id="ecmascript-2015-es6-">EcmaScript 2015 (ES6)</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/8"><code>#8</code> How important is ES6/JavaScript 2015 support?</a></li>
+</ul>
+<p>The discussion didn’t actually moved a lot, <strong>but it should!</strong></p>
+<p>So <a href="https://github.com/TiForward/discuss/issues/8">go ahead</a> and express your feelings!</p>
+<p>Also if you want to have some fun <strong>now</strong> have a look at these interesting
+projects that carve the way:</p>
+<ul>
+<li>for Alloy there’s @dbankier’s <a href="https://github.com/dbankier/JAST">JAST</a></li>
+<li>for Classic there’s @smclab’s <a href="https://github.com/smclab/titaniumifier/wiki/Host-mode#usage-with-babeljs">Titaniumifier in host-mode</a></li>
+</ul>
+<p>And some experimental ones:</p>
+<ul>
+<li>for Classic there’s an experiment from @rblalock called <a href="https://github.com/rblalock/es6_titanium_classic">es6_titanium_classic</a></li>
+<li>for Classic there’s also the experimental <a href="https://github.com/dawsontoth/ti.babel">ti.babel</a> from @dawsontoth</li>
+</ul>
+<hr>
+<h3 id="accessing-the-platform-sdk-native-apis">Accessing the platform SDK native APIs</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/1"><code>#1</code> JS runtime access to 100% of all native APIs, including any 3rd party SDKs added</a></li>
+<li><a href="https://github.com/TiForward/discuss/issues/2"><code>#2</code> The Titanium Mobile API written in JS</a></li>
+</ul>
+<p>This one got a lot attention! <a href="https://github.com/TiForward/discuss/issues/2#issuecomment-93142598">Since this comment on <code>#2</code></a> we really
+dig into the technical challenges and the state of the project.</p>
+<p>It’s probably the real core of this week discussions. What are you doing still
+here? <a href="https://github.com/TiForward/discuss/issues/2">Go read it!</a></p>
+<hr>
+<h3 id="ti-forward-developer-day">Ti.Forward Developer Day</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/11"><code>#11</code> Developer Day</a></li>
+</ul>
+<p>There’s this fantastic idea of having a real, concrete meetup the near future
+to ‘talk code’ and flesh things out.</p>
+<p>We‘re currently concerned of making it big enough to have the required energy
+but small enough to not explode in too many bike-shedding.</p>
+<p><a href="https://github.com/TiForward/discuss/issues/11">Help us solve this <em>impasse</em></a> and share your ideas!</p>
+<hr>
+<h3 id="backwards-compatibility">Backwards compatibility</h3>
+<ul>
+<li><a href="https://github.com/TiForward/discuss/issues/12"><code>#12</code> Backwards compatibility</a></li>
+</ul>
+<p>Will Ti.Next be a slow transformation from the current APIs? Will it be a
+completely different set?</p>
+<p>Those are the questions we’re trying to target in <a href="https://github.com/TiForward/discuss/issues/12"><code>#12</code></a>, and some
+interesting proposals have been made.</p>
+<p>The one I personally find more intriguing is to have the current Titanium™ SDK
+APIs implemented <strong>on top</strong> of the Ti.Next APIs, and in the user-land. This
+would let use focus on the future, and having the compatibility layer’s
+releases independent from the core.</p>
+<p>Not sold? <a href="https://github.com/TiForward/discuss/issues/12">Tell us so!</a></p>
+<hr>
+<h3 id="colophon">Colophon</h3>
+<p>A great week. I look <em>forward</em> the <em>next</em> one.</p>
+</div><div class="author"><h3>About the author</h3><div class="media"><div class="media-left"><a href="https://github.com/yuchi"><img width="50" height="50" src="//www.gravatar.com/avatar/fc40b1fe79ea6b10825141d86f767354.png?s=100" class="media-object"></a></div><div class="media-body"><div class="btn-group btn-group-xs pull-right"><a href="https://twitter.com/_pier" class="btn btn-primary"><i class="fa fa-twitter">&nbsp;</i><span>_pier</span></a><a href="https://github.com/yuchi" class="btn btn-primary"><i class="fa fa-github-alt">&nbsp;</i><span>yuchi</span></a></div><h4><a href="https://github.com/yuchi">Pier Paolo Ramon</a></h4><p>Author of Titaniumifier, Node.js/io.js enthusiast</p></div></div></div></div><div class="section"><div class="btn-group btn-group-primary"><a href="https://github.com/TiForward/discuss" class="btn btn-lg btn-primary"><div>Sign the manifesto</div><div><small>with a star on GitHub</small></div></a><a href="https://github.com/TiForward/discuss/issues" class="btn btn-lg btn-primary"><div>Participate now</div><div><small>to active discussions</small></div></a><a href="https://gitter.im/TiForward/tiforward.github.io" class="btn btn-lg btn-primary"><div>Share your ideas</div><div><small>in the Gitter chat</small></div></a></div><div class="btn-group"><a href="https://twitter.com/TiFwd" class="btn btn-lg"><i class="fa fa-twitter">&nbsp;</i><span>TiFwd</span></a><a href="https://github.com/TiForward" class="btn btn-lg"><i class="fa fa-github-alt">&nbsp;</i><span>TiForward</span></a></div></div><div class="section last"><p>Be humble »</p><p class="small">Titanium™, Appcelerator®, and Hyperloop™ are registered trademarks of Appcelerator inc.</p><p class="small">Ti.Forward and the community members assisting in this effort are in no way affiliated with Appcelerator inc.</p></div><script src="/build/bundle.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-61994919-1', 'auto');
+ga('send', 'pageview');</script></body></html>
