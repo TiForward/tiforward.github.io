@@ -34,10 +34,15 @@ At small steps we’re moving, but this takes us to the next point…
 
 - [Branch `ios-WIP` on `TiForward/HAL`](https://github.com/TiForward/HAL/tree/ios-WIP)
 
-Thanks to Olivier and Matt, there’s a working HAL on iOS setup, also supported
-by [Kota’s contribution][https://github.com/TiForward/discuss/issues/13#issuecomment-95396357].
+Thanks to Olivier and Matt, there’s a **working HAL on iOS setup**, also supported
+by [Kota’s contribution][kota].
+
+This is really great news of course, and it means we’re one step nearer our
+goal.
 
 The next one is Android of course!
+
+[kota]: https://github.com/TiForward/discuss/issues/13#issuecomment-95396357
 
 - - -
 
